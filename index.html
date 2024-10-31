@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wake On DSM</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #555;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        select,
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        select:focus,
+        input[type="text"]:focus,
+        button:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            form {
+                padding: 1.25rem;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            select,
+            input[type="text"],
+            button {
+                font-size: 0.9rem;
+                padding: 0.65rem;
+            }
+        }
+    </style>
+
+    <script>
+        function toggleMacInput() {
+            const macSelect = document.getElementById('macSelect');
+            const customMacField = document.getElementById('customMacField');
+
+            if (macSelect.value === 'other') {
+                customMacField.style.display = 'block';
+                document.getElementById('mac').required = true;
+            } else {
+                customMacField.style.display = 'none';
+                document.getElementById('mac').required = false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form action="wake.php" method="post">
+        <label for="macSelect">Select MAC Address</label>
+        <select name="macSelect" id="macSelect" onchange="toggleMacInput()" required>
+            <option value="">Choose a MAC Address</option>
+            <option value="AB:CD:EF:12:34:56">example (AB:CD:EF:12:34:56)</option>
+            <option value="other">Other</option>
+        </select>
+
+        <div id="customMacField" style="display: none;">
+            <label for="mac">Enter Custom MAC Address</label>
+            <input type="text" name="mac" id="mac" placeholder="e.g., AB:CD:EF:12:34:56">
+        </div>
+
+        <button type="submit">Wake</button>
+    </form>
+</body>
+
+</html>
