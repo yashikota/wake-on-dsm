@@ -1,3 +1,3 @@
 # wake-on-dsm
 
-Send Wake On Lan with Synology NAS(DSM).  
+Send `Wake On LAN` with Synology NAS(DSM).  
